@@ -11,4 +11,6 @@ public class ApiConstant {
 
     public static final String SIGN_SUFFIX = "】";
 
+    public static final Long SINGLE_FEE = 50L;
+
 }
