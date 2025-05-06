@@ -17,6 +17,7 @@
     <modules>
         <module>beacon-api</module>
         <module>beacon-common</module>
+        <module>beacon-cache</module>
     </modules>
 
     <properties>
@@ -26,6 +27,7 @@
 
         <spring.cloud-version>Hoxton.SR12</spring.cloud-version>
         <spring.cloud.alibaba-version>2.2.6.RELEASE</spring.cloud.alibaba-version>
+        <horse-version>1.0.0</horse-version>
     </properties>
 
     <dependencyManagement>
@@ -45,7 +47,16 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>com.msb.cloud</groupId>
+                <artifactId>horse-framework-starters</artifactId>
+                <version>${horse-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <dependencies>
