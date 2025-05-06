@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @Author Qin
@@ -47,10 +48,18 @@ public class CacheController {
 
     @GetMapping("/cache/hget/{key}/{field}")
     public Object hget(@PathVariable(value = "key") String key, @PathVariable(value = "field") String field) {
-        log.info("【缓存模块】 hGet，获取key ={},field={} 的数据", key, field);
+        log.info("【缓存模块】 hGet方法，获取key ={},field={} 的数据", key, field);
         Object value = redisClient.hGet(key, field);
-        log.info("【缓存模块】 hGetAll方法，获取key ={},field={} 的数据 value = {}", key, field, value);
+        log.info("【缓存模块】 hGet方法，获取key ={},field={} 的数据 value = {}", key, field, value);
         return value;
+    }
+
+    @GetMapping("/cache/smember/{key}")
+    public Set smember(@PathVariable(value = "key") String key) {
+        log.info("【缓存模块】 smember，获取key ={} 的数据", key);
+        Set<Object> values = redisClient.sMembers(key);
+        log.info("【缓存模块】 smember，获取key ={} 的数据 value = {}", key, values);
+        return values;
     }
 
 }
