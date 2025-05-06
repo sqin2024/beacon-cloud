@@ -100,4 +100,9 @@ public class StandardSubmit {
      */
     private int reportState;
 
+    private String realIP;
+
+    private String apiKey;
+
+    private int state;
 }

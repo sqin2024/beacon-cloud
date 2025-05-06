@@ -1,17 +1,24 @@
-package com.sqin.beaconapi;
+package com.sqin.tools;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
+/**
+ * @Author Qin
+ * @Date 2025/5/6 19:16
+ * @Description
+ **/
 @SpringBootApplication
-@EnableDiscoveryClient
 @EnableFeignClients
-public class BeaconApiApplication {
+@EnableDiscoveryClient
+@MapperScan(basePackages = "com.sqin.tools.mapper")
+public class BeaconToolsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BeaconApiApplication.class);
+        SpringApplication.run(BeaconToolsApplication.class);
     }
 
 }

@@ -4,9 +4,9 @@ import com.sqin.beaconapi.enums.SmsCodeEnum;
 import com.sqin.beaconapi.form.SingleSendForm;
 import com.sqin.beaconapi.util.R;
 import com.sqin.beaconapi.vo.ResultVO;
+import com.sqin.common.model.StandardSubmit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.BindingResult;
@@ -47,6 +47,13 @@ public class SmsController {
 
         // build standardSubmit, do validate
         String realIP = getRealIP(request);
+        StandardSubmit standardSubmit = new StandardSubmit();
+        standardSubmit.setRealIP(realIP);
+        standardSubmit.setApiKey(singleSendForm.getApiKey());
+        standardSubmit.setMobile(singleSendForm.getMobile());
+        standardSubmit.setText(singleSendForm.getText());
+        standardSubmit.setUid(singleSendForm.getUid());
+        standardSubmit.setState(singleSendForm.getState());
 
         // send to MQ.
         return R.ok();

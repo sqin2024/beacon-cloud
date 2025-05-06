@@ -1,0 +1,19 @@
+server:
+  port: 9005
+
+spring:
+  application:
+    name: beacon-tools
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.34.250.79:8848
+  datasource:
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://101.34.250.79:3306/beacon_cloud?characterEncoding=utf-8
+    username: root
+    password: QinSheng123!
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
