@@ -22,4 +22,6 @@ public interface CacheClient {
     @PostMapping(value = "/cache/set/{key}")
     void set(@PathVariable(value = "key") String key, @RequestParam(value = "value") String value);
 
+    @PostMapping(value = "/cache/sadd/{key}")
+    void sadd(@PathVariable(value = "key") String key, @RequestBody Map<String, Object>... maps);
 }

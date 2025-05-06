@@ -1,6 +1,10 @@
 package com.sqin.tools.entity;
 
+import lombok.Data;
+import lombok.ToString;
 
+@Data
+@ToString
 public class ClientSign {
 
   private long id;
