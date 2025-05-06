@@ -45,4 +45,12 @@ public class CacheController {
         return value;
     }
 
+    @GetMapping("/cache/hget/{key}/{field}")
+    public Object hget(@PathVariable(value = "key") String key, @PathVariable(value = "field") String field) {
+        log.info("【缓存模块】 hGet，获取key ={},field={} 的数据", key, field);
+        Object value = redisClient.hGet(key, field);
+        log.info("【缓存模块】 hGetAll方法，获取key ={},field={} 的数据 value = {}", key, field, value);
+        return value;
+    }
+
 }
