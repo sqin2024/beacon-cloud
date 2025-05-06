@@ -20,7 +20,7 @@ public interface CacheClient {
     void hmset(@PathVariable(value = "key") String key, @RequestBody Map<String, Object> map);
 
     @PostMapping(value = "/cache/set/{key}")
-    void set(@PathVariable(value = "key") String key, @RequestParam(value = "value") String value);
+    void set(@PathVariable(value = "key") String key, @RequestParam(value = "value") Object value);
 
     @PostMapping(value = "/cache/sadd/{key}")
     void sadd(@PathVariable(value = "key") String key, @RequestBody Map<String, Object>... maps);
