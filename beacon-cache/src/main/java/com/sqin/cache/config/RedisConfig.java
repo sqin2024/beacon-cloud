@@ -26,52 +26,52 @@ import java.time.format.DateTimeFormatter;
 @Configuration
 public class RedisConfig {
 
-    @Bean
-    public <T> RedisTemplate<String, T> redisTemplate(RedisConnectionFactory factory, RedisSerializer<Object> redisSerializer) {
-        // 1, 构建RedisTemplate对象
-        RedisTemplate<String, T> redisTemplate = new RedisTemplate<>();
-
-        // 2, 设置RedisConnectionFactory到RedisTemplate
-        redisTemplate.setConnectionFactory(factory);
-
-        // 3，设置Redis的key的序列化方式
-        redisTemplate.setKeySerializer(RedisSerializer.string());
-        redisTemplate.setHashKeySerializer(RedisSerializer.string());
-
-        // 4, 设置Redis的value的序列化方式 针对Date单独做序列化
-        redisTemplate.setKeySerializer(redisSerializer);
-        redisTemplate.setHashValueSerializer(redisSerializer);
-
-        // 5, 保证生效
-        redisTemplate.afterPropertiesSet();
-
-        // 6, 返回RedisTemplate
-        return redisTemplate;
-    }
-
-    @Bean
-    public RedisSerializer<Object> redisSerializer() {
-        // 1，构建Jackson的ObjectMapper
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        // 2, 设置JDK8日期格式的支持
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        Module timeModule = new JavaTimeModule()
-                .addDeserializer(LocalDate.class, new LocalDateDeserializer(dateFormatter))
-                .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(dateTimeFormatter))
-                .addSerializer(LocalDate.class, new LocalDateSerializer(dateFormatter))
-                .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(dateTimeFormatter));
-        objectMapper.registerModule(timeModule);
-
-        // 3, 构建Jackson2JsonRedisSerializer
-        Jackson2JsonRedisSerializer jsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-
-        // 4, 设置对JDK8日期的支持
-        jsonRedisSerializer.setObjectMapper(objectMapper);
-
-        // 5, 返回设置好的Jackson2JsonRedisSerializer
-        return jsonRedisSerializer;
-    }
+//    @Bean
+//    public <T> RedisTemplate<String, T> redisTemplate(RedisConnectionFactory factory, RedisSerializer<Object> redisSerializer) {
+//        // 1, 构建RedisTemplate对象
+//        RedisTemplate<String, T> redisTemplate = new RedisTemplate<>();
+//
+//        // 2, 设置RedisConnectionFactory到RedisTemplate
+//        redisTemplate.setConnectionFactory(factory);
+//
+//        // 3，设置Redis的key的序列化方式
+//        redisTemplate.setKeySerializer(RedisSerializer.string());
+//        redisTemplate.setHashKeySerializer(RedisSerializer.string());
+//
+//        // 4, 设置Redis的value的序列化方式 针对Date单独做序列化
+//        redisTemplate.setKeySerializer(redisSerializer);
+//        redisTemplate.setHashValueSerializer(redisSerializer);
+//
+//        // 5, 保证生效
+//        redisTemplate.afterPropertiesSet();
+//
+//        // 6, 返回RedisTemplate
+//        return redisTemplate;
+//    }
+//
+//    @Bean
+//    public RedisSerializer<Object> redisSerializer() {
+//        // 1，构建Jackson的ObjectMapper
+//        ObjectMapper objectMapper = new ObjectMapper();
+//
+//        // 2, 设置JDK8日期格式的支持
+//        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        Module timeModule = new JavaTimeModule()
+//                .addDeserializer(LocalDate.class, new LocalDateDeserializer(dateFormatter))
+//                .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(dateTimeFormatter))
+//                .addSerializer(LocalDate.class, new LocalDateSerializer(dateFormatter))
+//                .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(dateTimeFormatter));
+//        objectMapper.registerModule(timeModule);
+//
+//        // 3, 构建Jackson2JsonRedisSerializer
+//        Jackson2JsonRedisSerializer jsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+//
+//        // 4, 设置对JDK8日期的支持
+//        jsonRedisSerializer.setObjectMapper(objectMapper);
+//
+//        // 5, 返回设置好的Jackson2JsonRedisSerializer
+//        return jsonRedisSerializer;
+//    }
 
 }
