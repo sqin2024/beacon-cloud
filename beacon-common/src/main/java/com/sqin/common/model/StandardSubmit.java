@@ -105,4 +105,6 @@ public class StandardSubmit {
     private String apiKey;
 
     private int state;
+
+    private Long signId;
 }
