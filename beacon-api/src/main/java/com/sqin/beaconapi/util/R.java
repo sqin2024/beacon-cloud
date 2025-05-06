@@ -1,6 +1,8 @@
 package com.sqin.beaconapi.util;
 
 import com.sqin.beaconapi.vo.ResultVO;
+import com.sqin.common.enums.ExceptionEnums;
+import com.sqin.common.exception.ApiException;
 
 /**
  * @Author Qin
@@ -20,6 +22,13 @@ public class R {
         ResultVO resultVO = new ResultVO();
         resultVO.setCode(code);
         resultVO.setMsg(message);
+        return resultVO;
+    }
+
+    public static ResultVO error(ApiException exception) {
+        ResultVO resultVO = new ResultVO();
+        resultVO.setCode(exception.getCode());
+        resultVO.setMsg(exception.getMessage());
         return resultVO;
     }
 

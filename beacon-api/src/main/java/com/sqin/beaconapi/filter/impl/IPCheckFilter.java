@@ -1,6 +1,7 @@
 package com.sqin.beaconapi.filter.impl;
 
 import com.sqin.beaconapi.filter.CheckFilter;
+import com.sqin.common.model.StandardSubmit;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class IPCheckFilter implements CheckFilter {
 
     @Override
-    public void check(Object object) {
+    public void check(StandardSubmit standardSubmit) {
         log.info("【接口模块-校验ip】 校验ing");
     }
 

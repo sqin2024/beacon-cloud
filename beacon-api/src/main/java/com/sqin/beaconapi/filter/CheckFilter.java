@@ -1,5 +1,7 @@
 package com.sqin.beaconapi.filter;
 
+import com.sqin.common.model.StandardSubmit;
+
 /**
  * @Author Qin
  * @Date 2025/5/5 18:05
@@ -7,6 +9,6 @@ package com.sqin.beaconapi.filter;
  **/
 public interface CheckFilter {
 
-    void check(Object object);
+    void check(StandardSubmit standardSubmit);
 
 }

@@ -1,12 +1,14 @@
 package com.sqin.beaconapi.controller;
 
 import com.sqin.beaconapi.enums.SmsCodeEnum;
+import com.sqin.beaconapi.filter.CheckFilterContext;
 import com.sqin.beaconapi.form.SingleSendForm;
 import com.sqin.beaconapi.util.R;
 import com.sqin.beaconapi.vo.ResultVO;
 import com.sqin.common.model.StandardSubmit;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.BindingResult;
@@ -36,6 +38,9 @@ public class SmsController {
     @Value("${headers}")
     private String headers;
 
+    @Autowired
+    private CheckFilterContext checkFilterContext;
+
     @PostMapping(value = "/single_send", produces = "application/json;charset=utf-8")
     public ResultVO singleSend(@RequestBody @Validated SingleSendForm singleSendForm, BindingResult bindingResult, HttpServletRequest request) {
         // parameter validate.
@@ -54,6 +59,8 @@ public class SmsController {
         standardSubmit.setText(singleSendForm.getText());
         standardSubmit.setUid(singleSendForm.getUid());
         standardSubmit.setState(singleSendForm.getState());
+
+        checkFilterContext.check(standardSubmit);
 
         // send to MQ.
         return R.ok();
