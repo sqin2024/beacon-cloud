@@ -6,6 +6,7 @@ import com.sqin.beaconapi.form.SingleSendForm;
 import com.sqin.beaconapi.util.R;
 import com.sqin.beaconapi.vo.ResultVO;
 import com.sqin.common.model.StandardSubmit;
+import com.sqin.common.utils.SnowFlakeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class SmsController {
     private String headers;
 
     @Autowired
+    private SnowFlakeUtil snowFlakeUtil;
+
+    @Autowired
     private CheckFilterContext checkFilterContext;
 
     @PostMapping(value = "/single_send", produces = "application/json;charset=utf-8")
@@ -61,6 +65,10 @@ public class SmsController {
         standardSubmit.setState(singleSendForm.getState());
 
         checkFilterContext.check(standardSubmit);
+
+        long nextId = snowFlakeUtil.nextId();
+        System.out.println("nextId: " + nextId);
+        standardSubmit.setSequenceId(nextId);
 
         // send to MQ.
         return R.ok();

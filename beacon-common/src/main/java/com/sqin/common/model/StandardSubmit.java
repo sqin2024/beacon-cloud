@@ -18,6 +18,7 @@ public class StandardSubmit {
 
     /**
      * 针对当前短信的唯一标识
+     * 雪花算法
      */
     private Long sequenceId;
 
