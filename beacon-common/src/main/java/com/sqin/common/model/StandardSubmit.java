@@ -109,4 +109,6 @@ public class StandardSubmit implements Serializable {
     private int state;
 
     private Long signId;
+
+    private String errorMsg;
 }

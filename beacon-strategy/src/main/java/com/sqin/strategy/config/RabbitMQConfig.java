@@ -18,11 +18,17 @@ public class RabbitMQConfig {
 
     /**
      * 接口模块发送消息到策略模块的队列
+     *
      * @return
      */
     @Bean
     public Queue preSendQueue() {
         return QueueBuilder.durable(RabbitMQConstants.MOBILE_AREA_OPERATOR).build();
+    }
+
+    @Bean
+    public Queue writeLogQueue() {
+        return QueueBuilder.durable(RabbitMQConstants.SMS_WRITE_LOG).build();
     }
 
 }

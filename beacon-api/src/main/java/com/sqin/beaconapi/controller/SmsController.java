@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 /**
  * @Author Qin
@@ -74,6 +75,7 @@ public class SmsController {
 
         long nextId = snowFlakeUtil.nextId();
         standardSubmit.setSequenceId(nextId);
+        standardSubmit.setSendTime(LocalDateTime.now());
 
         // send message to mq
         rabbitTemplate.convertAndSend(RabbitMQConstants.SMS_PRE_SEND, standardSubmit, new CorrelationData(standardSubmit.getSequenceId().toString()));
