@@ -17,6 +17,7 @@ public enum ExceptionEnums {
     BALANCE_NOT_ENOUGH(-6, "手客户余额不足"),
     SNOWFLAKE_OUT_OF_RANGE(-11, "雪花算法的机器id或服务id超出最大范围"),
     SNOWFLAKE_TIME_BACK(-12, "雪花算法的当前时间出现回拨"),
+    DIRTY_WORD(-13, "当前短信内容里包含敏感信息"),
     ;
 
     private Integer code;

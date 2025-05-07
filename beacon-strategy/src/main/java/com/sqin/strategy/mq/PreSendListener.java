@@ -2,6 +2,7 @@ package com.sqin.strategy.mq;
 
 import com.rabbitmq.client.Channel;
 import com.sqin.common.constant.RabbitMQConstants;
+import com.sqin.common.exception.StrategyException;
 import com.sqin.common.model.StandardSubmit;
 import com.sqin.strategy.filter.StrategyFilterContext;
 import lombok.extern.slf4j.Slf4j;
@@ -28,16 +29,16 @@ public class PreSendListener {
     private StrategyFilterContext filterContext;
 
     @RabbitListener(queues = RabbitMQConstants.SMS_PRE_SEND)
-    public void listen(StandardSubmit standardSubmit, Message message, Channel channel) {
+    public void listen(StandardSubmit standardSubmit, Message message, Channel channel) throws IOException {
         log.info("【策略模块-接收消息】 接收到接口模块发送的消息 submit = {}", standardSubmit);
 
         try {
             filterContext.strategy(standardSubmit);
             log.info("【策略模块-消费完毕】手动ack");
-            channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.info("【策略模块-消费失败】失败");
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+        } catch (StrategyException e) {
+            log.info("【策略模块-消费失败】失败, msg = {}", e.getMessage());
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         }
     }
 

@@ -1,14 +1,14 @@
 package com.sqin.strategy.filter.impl;
 
+import com.sqin.common.enums.ExceptionEnums;
+import com.sqin.common.exception.StrategyException;
 import com.sqin.common.model.StandardSubmit;
 import com.sqin.strategy.filter.StrategyFilter;
-import com.sqin.strategy.util.DFAUtil;
 import com.sqin.strategy.util.HutoolDFAUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service(value = "hutoolDFADirtyWord")
 @Slf4j
@@ -27,6 +27,7 @@ public class DirtyWordHutoolDFAStrategyFilter implements StrategyFilter {
             //5、 如果有敏感词，抛出异常 / 其他操作。。
             log.info("【策略模块-敏感词校验】   短信内容包含敏感词信息， dirtyWords = {}", dirtyWords);
             // 还需要做其他处理
+            throw new StrategyException(ExceptionEnums.DIRTY_WORD);
         }
     }
 }
