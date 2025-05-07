@@ -17,4 +17,6 @@ public class CacheConstant {
 
     public static final String PHASE = "phase:";
 
+    public static final String DIRTY_WORD = "dirty_word";
+
 }
