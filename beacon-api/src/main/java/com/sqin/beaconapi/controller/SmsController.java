@@ -5,10 +5,13 @@ import com.sqin.beaconapi.filter.CheckFilterContext;
 import com.sqin.beaconapi.form.SingleSendForm;
 import com.sqin.beaconapi.util.R;
 import com.sqin.beaconapi.vo.ResultVO;
+import com.sqin.common.constant.RabbitMQConstants;
 import com.sqin.common.model.StandardSubmit;
 import com.sqin.common.utils.SnowFlakeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -40,6 +43,9 @@ public class SmsController {
     private String headers;
 
     @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @Autowired
     private SnowFlakeUtil snowFlakeUtil;
 
     @Autowired
@@ -67,10 +73,10 @@ public class SmsController {
         checkFilterContext.check(standardSubmit);
 
         long nextId = snowFlakeUtil.nextId();
-        System.out.println("nextId: " + nextId);
         standardSubmit.setSequenceId(nextId);
 
-        // send to MQ.
+        // send message to mq
+        rabbitTemplate.convertAndSend(RabbitMQConstants.SMS_PRE_SEND, standardSubmit, new CorrelationData(standardSubmit.getSequenceId().toString()));
         return R.ok();
     }
 

@@ -17,6 +17,7 @@ import javax.annotation.PostConstruct;
  * 第三位，占5个bit位，代表机器 id
  * 第四位，占5个bit位，服务id
  * 第五位，占12个bit位，序列，自增的数字
+ * todo: 算法需要完善
  **/
 @Component
 public class SnowFlakeUtil {
