@@ -15,4 +15,6 @@ public class CacheConstant {
 
     public static final String CLIENT_BALANCE_PREFIX  = "client_balance:";
 
+    public static final String PHASE = "phase:";
+
 }
