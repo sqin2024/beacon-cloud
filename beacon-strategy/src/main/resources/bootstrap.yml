@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: beacon-strategy
+
+  profiles:
+    active: dev
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 101.34.250.79:8848
+      config:
+        server-addr: 101.34.250.79:8848
+        file-extension: yml
