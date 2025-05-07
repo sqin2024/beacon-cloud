@@ -9,4 +9,6 @@ public class RabbitMQConstants {
 
     public static final String SMS_PRE_SEND = "sms_pre_send_topic";
 
+    public static final String MOBILE_AREA_OPERATOR = "mobile_area_operator_topic";
+
 }

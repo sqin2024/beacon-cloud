@@ -28,8 +28,14 @@ public class CacheController {
 
     @PostMapping(value = "/cache/set/{key}")
     public void set(@PathVariable(value = "key") String key, @RequestParam(value = "value") Object value) {
-        log.info("[缓存模块] sety方法, 存储key = {}, value = {}", key, value);
+        log.info("[缓存模块] set方法, 存储key = {}, value = {}", key, value);
         redisClient.set(key, value);
+    }
+
+    @GetMapping(value = "/cache/get/{key}")
+    public Object get(@PathVariable(value = "key") String key) {
+        log.info("[缓存模块] get方法, 存储key = {}", key);
+        return redisClient.get(key);
     }
 
     @PostMapping(value = "/cache/sadd/{key}")
