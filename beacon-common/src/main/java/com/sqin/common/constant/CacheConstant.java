@@ -27,4 +27,6 @@ public class CacheConstant {
 
     public static final String LIMIT_MINUTES = "limit:minutes:";
 
+    public static final String LIMIT_HOURS = "limit:hours:";
+
 }

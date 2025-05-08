@@ -111,17 +111,14 @@ public class CacheController {
         return result;
     }
 
-    @PostMapping(value = "/cache/zremove/{key}/{score}")
-    public void zRemove(@PathVariable(value = "key") String key,
-                        @PathVariable(value = "score") String score) {
-        log.info("【缓存模块】 zaddLong方法，存储key = {}，存储score = {}，存储value = {}", key, score, score);
-        redisClient.zRemove(key, score, score);
+    @DeleteMapping(value = "/cache/zremove/{key}/{member}")
+    public void zRemove(@PathVariable(value = "key") String key, @PathVariable(value = "member") String member) {
+        log.info("【缓存模块】 zRemove方法，存储key = {}，存储score = {}", key, member);
+        redisClient.zRemove(key, member, member);
     }
 
     @GetMapping(value = "/cache/zrangebyscorecount/{key}/{start}/{end}")
-    public int zRangeByScoreCount(@PathVariable(value = "key") String key,
-                                  @PathVariable(value = "start") Double start,
-                                  @PathVariable(value = "end") Double end) {
+    public int zRangeByScoreCount(@PathVariable(value = "key") String key, @PathVariable(value = "start") Double start, @PathVariable(value = "end") Double end) {
         log.info("【缓存模块】 zRangeByScoreCount方法，查询key = {},start = {},end = {}", key, start, end);
         Set<ZSetOperations.TypedTuple<Object>> values = redisTemplate.opsForZSet().rangeByScoreWithScores(key, start, end);
         if (values != null) {

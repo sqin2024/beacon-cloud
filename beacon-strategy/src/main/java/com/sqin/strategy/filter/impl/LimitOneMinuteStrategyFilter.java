@@ -1,6 +1,7 @@
 package com.sqin.strategy.filter.impl;
 
 import com.sqin.common.constant.CacheConstant;
+import com.sqin.common.constant.SmsConstants;
 import com.sqin.common.enums.ExceptionEnums;
 import com.sqin.common.exception.StrategyException;
 import com.sqin.common.model.StandardSubmit;
@@ -36,6 +37,11 @@ public class LimitOneMinuteStrategyFilter implements StrategyFilter {
 
     @Override
     public void strategy(StandardSubmit submit) {
+        // 判断短信类型不是验证码类的，直接结束方法
+        if(submit.getState() != SmsConstants.CODE_TYPE){
+            return;
+        }
+
         //1、基于submit获取短信的发送时间
         LocalDateTime sendTime = submit.getSendTime();
         //2、基于LocalDateTime获取到时间的毫秒值

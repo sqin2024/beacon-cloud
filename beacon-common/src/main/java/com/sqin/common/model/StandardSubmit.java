@@ -113,5 +113,7 @@ public class StandardSubmit implements Serializable {
     private String errorMsg;
 
     private Boolean isTransfer;
+
+    private Long oneHourLimitMilli;
 }
 
