@@ -111,4 +111,7 @@ public class StandardSubmit implements Serializable {
     private Long signId;
 
     private String errorMsg;
+
+    private Boolean isTransfer;
 }
+
