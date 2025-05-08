@@ -31,4 +31,8 @@ public interface BeaconCacheClient {
 
     @GetMapping(value = "/cache/zrangebyscorecount/{key}/{start}/{end}")
     int zRangeByScoreCount(@PathVariable(value = "key") String key, @PathVariable(value = "start") Double start, @PathVariable(value = "end") Double end);
+
+    @PostMapping(value = "/cache/hincrby/{key}/{field}/{delta}")
+    Long hIncrBy(@PathVariable(value = "key") String key, @PathVariable(value = "field") String field, @PathVariable(value = "delta") Long delta);
+
 }

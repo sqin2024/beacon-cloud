@@ -29,4 +29,6 @@ public class CacheConstant {
 
     public static final String LIMIT_HOURS = "limit:hours:";
 
+    public static final String CLIENT_BALANCE = "client_balance:";
+
 }
