@@ -31,4 +31,8 @@ public class CacheConstant {
 
     public static final String CLIENT_BALANCE = "client_balance:";
 
+    public static final String CHANNEL = "channel:";
+
+    public static final String CLIENT_CHANNEL = "client_channel:";
+
 }

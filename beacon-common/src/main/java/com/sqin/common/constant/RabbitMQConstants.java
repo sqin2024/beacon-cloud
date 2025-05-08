@@ -24,4 +24,6 @@ public class RabbitMQConstants {
 
 
     public static final String SMS_PUSH_REPORT = "sms_push_report_topic";
+
+    public static final String SMS_GATEWAY = "sms_gateway_topic";
 }
