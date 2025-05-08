@@ -19,4 +19,8 @@ public class CacheConstant {
 
     public static final String DIRTY_WORD = "dirty_word";
 
+    public static final String BLACK = "black:";
+
+    public static final String SEPARATE = ":";
+
 }

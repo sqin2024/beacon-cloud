@@ -18,6 +18,8 @@ public enum ExceptionEnums {
     SNOWFLAKE_OUT_OF_RANGE(-11, "雪花算法的机器id或服务id超出最大范围"),
     SNOWFLAKE_TIME_BACK(-12, "雪花算法的当前时间出现回拨"),
     DIRTY_WORD(-13, "当前短信内容里包含敏感信息"),
+    BLACK_GLOBAL(-14, "当前手机号属于全局黑名单"),
+    BLACK_CLIENT(-15, "当前手机号属于客户黑名单"),
     ;
 
     private Integer code;
