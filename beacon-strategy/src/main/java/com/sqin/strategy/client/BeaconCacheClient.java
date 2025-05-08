@@ -25,4 +25,13 @@ public interface BeaconCacheClient {
 
     @GetMapping("/cache/smember/{key}")
     Set smember(@PathVariable(value = "key") String key);
+
+    @PostMapping(value = "/cache/zadd/{key}/{score}/{member}")
+    Boolean zadd(@PathVariable(value = "key") String key, @PathVariable(value = "score") Long score, @PathVariable(value = "member") Object member);
+
+    @PostMapping(value = "/cache/zremove/{key}/{score}")
+    void zRemove(@PathVariable(value = "key") String key, @PathVariable(value = "score") String score);
+
+    @GetMapping(value = "/cache/zrangebyscorecount/{key}/{start}/{end}")
+    int zRangeByScoreCount(@PathVariable(value = "key") String key, @PathVariable(value = "start") Double start, @PathVariable(value = "end") Double end);
 }

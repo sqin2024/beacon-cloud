@@ -3,6 +3,8 @@ package com.sqin.cache.controller;
 import com.msb.framework.redis.RedisClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -19,6 +21,9 @@ public class CacheController {
 
     @Autowired
     private RedisClient redisClient;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @PostMapping(value = "/cache/hmset/{key}")
     public void hmset(@PathVariable(value = "key") String key, @RequestBody Map<String, Object> map) {
@@ -95,6 +100,34 @@ public class CacheController {
         redisClient.delete(key);
         //4、 返回交集结果
         return result;
+    }
+
+    @PostMapping(value = "/cache/zadd/{key}/{score}/{member}")
+    public Boolean zadd(@PathVariable(value = "key") String key,
+                        @PathVariable(value = "score") Long score,
+                        @PathVariable(value = "member") Object member) {
+        log.info("【缓存模块】 zaddLong方法，存储key = {}，存储score = {}，存储value = {}", key, score, member);
+        Boolean result = redisClient.zAdd(key, member, score);
+        return result;
+    }
+
+    @PostMapping(value = "/cache/zremove/{key}/{score}")
+    public void zRemove(@PathVariable(value = "key") String key,
+                        @PathVariable(value = "score") String score) {
+        log.info("【缓存模块】 zaddLong方法，存储key = {}，存储score = {}，存储value = {}", key, score, score);
+        redisClient.zRemove(key, score, score);
+    }
+
+    @GetMapping(value = "/cache/zrangebyscorecount/{key}/{start}/{end}")
+    public int zRangeByScoreCount(@PathVariable(value = "key") String key,
+                                  @PathVariable(value = "start") Double start,
+                                  @PathVariable(value = "end") Double end) {
+        log.info("【缓存模块】 zRangeByScoreCount方法，查询key = {},start = {},end = {}", key, start, end);
+        Set<ZSetOperations.TypedTuple<Object>> values = redisTemplate.opsForZSet().rangeByScoreWithScores(key, start, end);
+        if (values != null) {
+            return values.size();
+        }
+        return 0;
     }
 
 }

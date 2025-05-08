@@ -20,6 +20,7 @@ public enum ExceptionEnums {
     DIRTY_WORD(-13, "当前短信内容里包含敏感信息"),
     BLACK_GLOBAL(-14, "当前手机号属于全局黑名单"),
     BLACK_CLIENT(-15, "当前手机号属于客户黑名单"),
+    ONE_MINUTE_LIMIT(-16, "一分钟只能发送一条短信"),
     ;
 
     private Integer code;
