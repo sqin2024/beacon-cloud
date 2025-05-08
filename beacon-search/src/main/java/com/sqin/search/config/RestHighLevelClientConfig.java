@@ -1,6 +1,10 @@
 package com.sqin.search.config;
 
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -21,8 +25,15 @@ public class RestHighLevelClientConfig {
     @Value("#{'${elasticsearch.hostAndPorts}'.split(',')}")
     private List<String> hostAndPorts;
 
+    @Value("${elasticsearch.username}")
+    private String username;
+
+    @Value("${elasticsearch.password}")
+    private String password;
+
     /**
      * 构建连接es的client对象
+     *
      * @return
      */
     @Bean
@@ -33,7 +44,15 @@ public class RestHighLevelClientConfig {
             httpHosts[i] = new HttpHost(hostAndPort[0], Integer.parseInt(hostAndPort[1]));
         }
 
+        // 设置认证信息
+        UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
+        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(AuthScope.ANY, credentials);
+
+        // 构建时设置连接信息，认证信息
         RestClientBuilder restClientBuilder = RestClient.builder(httpHosts);
+        restClientBuilder.setHttpClientConfigCallback(f -> f.setDefaultCredentialsProvider(credentialsProvider));
+
         RestHighLevelClient restHighLevelClient = new RestHighLevelClient(restClientBuilder);
         return restHighLevelClient;
     }

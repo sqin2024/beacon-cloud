@@ -9,6 +9,7 @@ import lombok.Getter;
  **/
 @Getter
 public enum ExceptionEnums {
+    UNKNOWN_ERROR(-999, "未知异常"),
     ERROR_APIKEY(-1, "非法的apikey"),
     IP_NOT_WHITE(-2, "请求的ip不在白名单内"),
     ERROR_SIGN(-3, "无可用签名"),
@@ -22,8 +23,8 @@ public enum ExceptionEnums {
     BLACK_CLIENT(-15, "当前手机号属于客户黑名单"),
     ONE_MINUTE_LIMIT(-16, "一分钟只能发送一条短信"),
     ONE_HOUR_LIMIT(-17, "一小时只能发送三条短信"),
-    NO_CHANNEL(18, "没有可以发送渠道"),
-    UNKNOWN_ERROR(19, "未知异常"),
+    NO_CHANNEL(-18, "没有可以发送渠道"),
+    INDEX_ERROR(-19, "添加文档信息失败"),
     ;
 
     private Integer code;
