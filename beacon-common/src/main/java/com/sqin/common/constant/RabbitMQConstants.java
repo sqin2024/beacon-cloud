@@ -22,4 +22,6 @@ public class RabbitMQConstants {
      */
     public static final String SMS_WRITE_LOG = "sms_write_log_topic";
 
+
+    public static final String SMS_PUSH_REPORT = "sms_push_report_topic";
 }

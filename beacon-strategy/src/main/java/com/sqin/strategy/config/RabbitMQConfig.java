@@ -31,4 +31,9 @@ public class RabbitMQConfig {
         return QueueBuilder.durable(RabbitMQConstants.SMS_WRITE_LOG).build();
     }
 
+    @Bean
+    public Queue pushReportQueue() {
+        return QueueBuilder.durable(RabbitMQConstants.SMS_PUSH_REPORT).build();
+    }
+
 }
