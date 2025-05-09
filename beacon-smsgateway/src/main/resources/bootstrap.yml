@@ -12,3 +12,9 @@ spring:
       config:
         server-addr: 101.34.250.79:8848
         file-extension: yml
+
+#  rabbitmq:
+#    listener:
+#      simple:
+#        concurrency: 10   # 十个线程同时消费
+#        prefetch: 50      # 每次最多拉取50条到JVM中
