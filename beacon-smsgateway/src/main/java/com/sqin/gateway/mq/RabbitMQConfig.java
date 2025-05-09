@@ -1,4 +1,4 @@
-package com.sqin.gateway;
+package com.sqin.gateway.mq;
 
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
