@@ -66,4 +66,10 @@ public class StandardReport implements Serializable {
 
     private String callbackUrl;
 
+    /**
+     * 推送报告重试次数
+     */
+    private Integer resendCount = 0;
+
+
 }
